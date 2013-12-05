@@ -158,14 +158,14 @@ class Hwg_Attributemanager_Block_Adminhtml_Customer_Edit_Tab_Main extends Mage_A
             'title' => Mage::helper('catalog')->__('Values Required'),
             'values' => $yesno,
         ));
-		
-		$fieldset->addField('is_visible', 'select', array(
+        
+        $fieldset->addField('is_visible', 'select', array(
             'name' => 'is_visible',
             'label' => Mage::helper('catalog')->__('Is Visible'),
             'title' => Mage::helper('catalog')->__('Is Visible'),
             'values' => $yesno,
         ));
-		
+        
         $fieldset->addField('frontend_class', 'select', array(
             'name'  => 'frontend_class',
             'label' => Mage::helper('catalog')->__('Input Validation for Store Owner'),
@@ -203,46 +203,63 @@ class Hwg_Attributemanager_Block_Adminhtml_Customer_Edit_Tab_Main extends Mage_A
         ));
        
         $fieldset = $form->addFieldset('front_fieldset',
-        	array('legend'=>Mage::helper('catalog')->__('Frontend Properties')));
-		
-		if($model->getId())
-		{
-			$write = Mage::getSingleton('core/resource')->getConnection('core_write');
-			$readresult=$write->query("SELECT * from customer_form_attribute WHERE attribute_id=".$model->getId());
-			while ($row = $readresult->fetch() ) {
-				$customerForm[$row['form_code']] = 'checked';
-			}
-		}
-		$fieldset->addField('adminhtml_customer', 'checkbox', array(
+            array('legend'=>Mage::helper('catalog')->__('Frontend Properties')));
+        
+        if($model->getId())
+        {
+            $write = Mage::getSingleton('core/resource')->getConnection('core_write');
+            $readresult=$write->query("SELECT * from customer_form_attribute WHERE attribute_id=".$model->getId());
+            while ($row = $readresult->fetch() ) {
+                $customerForm[$row['form_code']] = 'checked';
+            }
+        }
+        $fieldset->addField('adminhtml_customer', 'checkbox', array(
             'name' => 'customer_form[]',
             'label' => Mage::helper('catalog')->__('Adminhtml Customer'),
-			'value' => 'adminhtml_customer',
-			'checked' => isset($customerForm['adminhtml_customer'])?$customerForm['adminhtml_customer']:'',
+            'value' => 'adminhtml_customer',
+            'checked' => isset($customerForm['adminhtml_customer'])?$customerForm['adminhtml_customer']:'',
         ));
-		$fieldset->addField('customer_account_create', 'checkbox', array(
-            'name' => 'customer_form[]',
-            'label' => Mage::helper('catalog')->__('Customer Account Create'),
-			'value' => 'customer_account_create',
-			'checked' => isset($customerForm['customer_account_create'])?$customerForm['customer_account_create']:'',
-        ));
-		$fieldset->addField('customer_address_edit', 'checkbox', array(
-            'name' => 'customer_form[]',
-            'label' => Mage::helper('catalog')->__('Customer Address Edit'),
-			'value' => 'customer_address_edit',
-			'checked' => isset($customerForm['customer_address_edit'])?$customerForm['customer_address_edit']:'',
-        ));
-		$fieldset->addField('checkout_register', 'checkbox', array(
+        $fieldset->addField('checkout_register', 'checkbox', array(
             'name' => 'customer_form[]',
             'label' => Mage::helper('catalog')->__('Checkout Register'),
-			'value' => 'checkout_register',
-			'checked' => isset($customerForm['checkout_register'])?$customerForm['checkout_register']:'',
+            'value' => 'checkout_register',
+            'checked' => isset($customerForm['checkout_register'])?$customerForm['checkout_register']:'',
         ));
-		$fieldset->addField('sort_order', 'text', array(
-            'name' => 'sort_order',
-            'label' => Mage::helper('catalog')->__('Sort Order'),
-            'title' => Mage::helper('catalog')->__('Sort Order'),
-            'class' => 'validate-digits',
-        	'value' => $model->getAttributeSetInfo()
+        $fieldset->addField('customer_account_create', 'checkbox', array(
+            'name' => 'customer_form[]',
+            'label' => Mage::helper('catalog')->__('Customer Account Create'),
+            'value' => 'customer_account_create',
+            'checked' => isset($customerForm['customer_account_create'])?$customerForm['customer_account_create']:'',
+        ));
+        $fieldset->addField('customer_account_edit', 'checkbox', array(
+            'name' => 'customer_form[]',
+            'label' => Mage::helper('catalog')->__('Customer Account Edit'),
+            'value' => 'customer_account_edit',
+            'checked' => isset($customerForm['customer_account_edit'])?$customerForm['customer_account_edit']:'',
+        ));
+        $fieldset->addField('adminhtml_checkout', 'checkbox', array(
+            'name' => 'customer_form[]',
+            'label' => Mage::helper('catalog')->__('Adminhtml Checkout'),
+            'value' => 'adminhtml_checkout',
+            'checked' => isset($customerForm['adminhtml_checkout'])?$customerForm['adminhtml_checkout']:'',
+        ));
+        $fieldset->addField('adminhtml_customer_address', 'checkbox', array(
+            'name' => 'customer_form[]',
+            'label' => Mage::helper('catalog')->__('Adminhtml Customer Address'),
+            'value' => 'adminhtml_customer_address',
+            'checked' => isset($customerForm['adminhtml_customer_address'])?$customerForm['adminhtml_customer_address']:'',
+        ));
+        $fieldset->addField('customer_address_edit', 'checkbox', array(
+            'name' => 'customer_form[]',
+            'label' => Mage::helper('catalog')->__('Customer Address Edit'),
+            'value' => 'customer_address_edit',
+            'checked' => isset($customerForm['customer_address_edit'])?$customerForm['customer_address_edit']:'',
+        )); 
+        $fieldset->addField('customer_register_address', 'checkbox', array(
+            'name' => 'customer_form[]',
+            'label' => Mage::helper('catalog')->__('Customer Register Address'),
+            'value' => 'customer_register_address',
+            'checked' => isset($customerForm['customer_register_address'])?$customerForm['customer_register_address']:'',
         ));
         
 
